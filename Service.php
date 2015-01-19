@@ -92,4 +92,9 @@ class Service
         }
     }
 
+     public static function onBeforeThemeSettingsSave(\Box_Event $event)
+    {
+        throw new \Exception(self::MSG, 403);
+    }
+
 }
