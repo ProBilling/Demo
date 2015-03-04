@@ -87,7 +87,13 @@ class Service
     public static function onBeforeAdminExtensionConfigSave(\Box_Event $event)
     {
         $data = $event->getParameters();
-        if(isset($data['ext']) && ucfirst($data['ext']) == 'Staff') {
+        if (isset($data['ext']) && $data['ext'] == 'mod_client') {
+            if (isset($data['require_email_confirmation']) && $data['require_email_confirmation']) {
+                throw new \Exception(self::MSG, 403);
+            }
+        }
+
+        if (isset($data['ext']) && $data['ext'] == 'mod_staff') {
             throw new \Exception(self::MSG, 403);
         }
     }
